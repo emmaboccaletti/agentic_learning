@@ -1,0 +1,10 @@
+{
+  "rows": 7043,
+  "cols": 30,
+  "target": "Churn",
+  "target_type": "binary_classification",
+  "class_balance": {
+    "No": 0.7346301292063041,
+    "Yes": 0.2653698707936959
+  }
+}

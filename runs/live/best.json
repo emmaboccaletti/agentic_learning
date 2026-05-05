@@ -1,0 +1,1 @@
+{"run_id": "2026-05-02T12-19_lr_01", "model": "logistic_regression", "primary_metric_name": "roc_auc", "primary_metric_value": 0.8415846443979436, "secondary_metrics_json": "{}", "duration_s": 0.03, "status": "ok", "artifact_path": "models/2026-05-02T12-19_lr_01.pkl"}

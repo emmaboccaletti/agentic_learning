@@ -1,0 +1,5 @@
+run_id	model	primary_metric_name	primary_metric_value	secondary_metrics_json	duration_s	status	artifact_path
+2026-05-02T12-19_lgbm_01	lightgbm	roc_auc	failed	{"error": "ValueError: unsupported model: lightgbm (supported: ['logistic_regression', 'xgboost'])"}	0.0	failed	
+2026-05-02T12-19_lr_01	logistic_regression	roc_auc	0.8415846443979436	{}	0.03	ok	models/2026-05-02T12-19_lr_01.pkl
+2026-05-02T12-19_xgb_01	xgboost	roc_auc	0.8354284533312666	{}	0.32	ok	models/2026-05-02T12-19_xgb_01.pkl
+2026-05-02T12-19_lgbm_01	lightgbm	roc_auc		{"error": "ValueError: unsupported model: lightgbm (supported: ['logistic_regression', 'xgboost'])"}	0.0	failed	
