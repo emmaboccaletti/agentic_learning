@@ -27,8 +27,9 @@ One pass per run. If the user changes the input or constraints mid-run, the supe
 ## Directory layout
 
 ```
-agents/                     # Hermes personas (this file's neighbors)
+skills/                     # Agent skills (NemoClaw-compatible SKILL.md files)
 scripts/                    # actual work: prepare.py, train.py, render_report.py
+policy/                     # NemoClaw sandbox network policies (YAML)
 data/raw/                   # client input lands here (read-only to agents)
 data/clean/                 # preprocessor output: clean.parquet + profile.json
 runs/queue/                 # architect drops candidate configs here
@@ -44,7 +45,7 @@ reports/final.md            # reporter output
 |---|---|---|---|
 | `scripts/*.py` | all agents | **never** | n/a |
 | `AGENTS.md` | all agents | **never** | n/a |
-| `agents/*.md` | all agents | **never** (humans curate personas) | n/a |
+| `skills/*/SKILL.md` | all agents | **never** (humans curate skills) | n/a |
 | `data/raw/` | preprocessor | **never** (read-only to all) | n/a |
 | `data/clean/` | all downstream | preprocessor only | no |
 | `runs/queue/` | trainer | architect only | no |

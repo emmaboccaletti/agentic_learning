@@ -23,13 +23,13 @@ brew install libomp
 
 ## One-time setup
 
-Create the four agent profiles and copy in their personas:
+Create the four agent profiles and copy in their skills:
 
 ```bash
 bash scripts/setup_profiles.sh
 ```
 
-This runs `hermes profile create` for each role (preprocessor, architect, trainer, reporter), copies each `agents/<role>.md` into the matching `~/.hermes/profiles/<role>/SOUL.md`, and inherits `config.yaml` + `.env` from the default profile so each one has a model.
+This runs `hermes profile create` for each role (preprocessor, architect, trainer, reporter), copies each `skills/<role>/SKILL.md` into the matching `~/.hermes/profiles/<role>/SOUL.md`, and inherits `config.yaml` + `.env` from the default profile so each one has a model.
 
 Verify:
 

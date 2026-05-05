@@ -16,9 +16,9 @@ if ! command -v hermes >/dev/null 2>&1; then
 fi
 
 for role in "${ROLES[@]}"; do
-  persona="$REPO_ROOT/agents/$role.md"
+  persona="$REPO_ROOT/skills/$role/SKILL.md"
   if [[ ! -f "$persona" ]]; then
-    echo "error: missing persona $persona" >&2
+    echo "error: missing skill $persona" >&2
     exit 1
   fi
 
@@ -30,9 +30,9 @@ for role in "${ROLES[@]}"; do
     hermes profile create "$role"
   fi
 
-  # Materialize the persona as the profile's SOUL.md.
+  # Materialize the skill as the profile's SOUL.md.
   cp "$persona" "$profile_dir/SOUL.md"
-  echo "[$role] SOUL.md ← agents/$role.md"
+  echo "[$role] SOUL.md ← skills/$role/SKILL.md"
 
   # Inherit model + API config from the default profile.
   # `hermes profile create` leaves these blank, so the new profile has no model.

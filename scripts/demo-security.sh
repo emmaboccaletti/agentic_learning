@@ -130,7 +130,7 @@ info "Reporter policy version:"
 openshell policy get reporter 2>&1 | grep "Active:"
 
 info "Policy files on disk:"
-ls -1 /Users/marcelo/Development/gtc_taipei/policies/
+ls -1 "$(dirname "$0")/../policy/"
 
 # ── Summary ────────────────────────────────────────────────────────────────
 
@@ -149,8 +149,8 @@ cat <<'EOF'
   └─────────────────┴──────────────────┴──────────────────┘
 
   YAML policy files:
-    policies/demo-pipeline-restricted.yaml  → data-pipeline policy
-    policies/reporter-restricted.yaml       → reporter policy (zero network)
+    policy/demo-pipeline-restricted.yaml  → data-pipeline policy
+    policy/reporter-restricted.yaml       → reporter policy (zero network)
 
   To modify a policy:
     1. Edit the YAML file

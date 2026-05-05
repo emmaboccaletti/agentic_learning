@@ -48,8 +48,8 @@ PIPELINE_SB="data-pipeline"
 REPORTER_SB="reporter"
 
 # Policy files
-PIPELINE_POLICY="$REPO_ROOT/policies/demo-pipeline-restricted.yaml"
-REPORTER_POLICY="$REPO_ROOT/policies/reporter-restricted.yaml"
+PIPELINE_POLICY="$REPO_ROOT/policy/demo-pipeline-restricted.yaml"
+REPORTER_POLICY="$REPO_ROOT/policy/reporter-restricted.yaml"
 
 # ── Helpers ─────────────────────────────────────────────────────────────────
 run() {
@@ -109,10 +109,10 @@ REQUIRED_FILES=(
     "scripts/train.py"
     "scripts/render_report.py"
     "scripts/demo-security.sh"
-    "agents/preprocessor.md"
-    "agents/architect.md"
-    "agents/trainer.md"
-    "agents/reporter.md"
+    "skills/preprocessor/SKILL.md"
+    "skills/architect/SKILL.md"
+    "skills/trainer/SKILL.md"
+    "skills/reporter/SKILL.md"
     "AGENTS.md"
     "requirements.txt"
 )
@@ -249,9 +249,9 @@ UPLOAD_PIPE=(
     "scripts/prepare.py:/sandbox/scripts/prepare.py"
     "scripts/train.py:/sandbox/scripts/train.py"
     "scripts/render_report.py:/sandbox/scripts/render_report.py"
-    "agents/preprocessor.md:/sandbox/agents/preprocessor.md"
-    "agents/architect.md:/sandbox/agents/architect.md"
-    "agents/trainer.md:/sandbox/agents/trainer.md"
+    "skills/preprocessor/SKILL.md:/sandbox/skills/preprocessor/SKILL.md"
+    "skills/architect/SKILL.md:/sandbox/skills/architect/SKILL.md"
+    "skills/trainer/SKILL.md:/sandbox/skills/trainer/SKILL.md"
     "AGENTS.md:/sandbox/AGENTS.md"
 )
 
@@ -276,7 +276,7 @@ section "7. Uploading files to $REPORTER_SB"
 
 UPLOAD_RPT=(
     "scripts/render_report.py:/sandbox/scripts/render_report.py"
-    "agents/reporter.md:/sandbox/agents/reporter.md"
+    "skills/reporter/SKILL.md:/sandbox/skills/reporter/SKILL.md"
     "AGENTS.md:/sandbox/AGENTS.md"
 )
 
@@ -336,8 +336,9 @@ cat <<'EOF'
 
   Files uploaded:
     data-pipeline: telco-churn.csv, prepare.py, train.py, render_report.py,
-                   preprocessor.md, architect.md, trainer.md, AGENTS.md
-    reporter:      render_report.py, reporter.md, AGENTS.md
+                   skills/preprocessor/SKILL.md, skills/architect/SKILL.md,
+                   skills/trainer/SKILL.md, AGENTS.md
+    reporter:      render_report.py, skills/reporter/SKILL.md, AGENTS.md
 
   Next steps:
     1. Run the pipeline:
