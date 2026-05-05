@@ -1,4 +1,4 @@
-# GTC Taipei: Tabular ML Pipeline Demo
+# Agentic Learning Series: Tabular ML Pipeline Demo
 
 Your AI agent turns a client's spreadsheet into a trained ML model and a one-page decision-support report — all inside hardened NemoClaw sandboxes.
 
@@ -18,7 +18,7 @@ Your AI agent turns a client's spreadsheet into a trained ML model and a one-pag
 
 ### What makes it different
 
-Other demos in this repo add a single capability (vision, speech, NASA photos) to an agent. This demo showcases **multi-agent orchestration with security-first sandboxing** — two isolated sandboxes, four distinct agent roles, and a fully auditable ML pipeline. It's designed for GTC booth demos where security and governance matter as much as the AI.
+Other demos in this repo add a single capability (vision, speech, NASA photos) to an agent. This demo showcases **multi-agent orchestration with security-first sandboxing** — two isolated sandboxes, four distinct agent roles, and a fully auditable ML pipeline. It's designed for ALS booth demos where security and governance matter as much as the AI.
 
 ---
 
@@ -38,7 +38,7 @@ Other demos in this repo add a single capability (vision, speech, NASA photos) t
 ## Quick Start
 
 ```bash
-cd gtc-taipei-demo
+cd agentic-learning-demo
 bash install.sh
 ```
 
@@ -210,9 +210,9 @@ reports/final.md               # Client-facing report with:
 ## File Structure
 
 ```
-gtc-taipei-demo/
+agentic-learning-demo/
 ├── install.sh                        # Automated installer
-├── gtc-taipei-demo-guide.md         # This guide
+├── agentic-learning-demo-guide.md         # This guide
 ├── AGENTS.md                        # Agent operating contract (hand-off rules, schemas)
 ├── requirements.txt                 # Python dependencies
 ├── policy/
@@ -238,8 +238,8 @@ gtc-taipei-demo/
 ├── data/
 │   └── raw/
 │       └── telco-churn.csv         # Sample dataset (included for demos)
-├── gtc-demo-setup.svg              # Architecture diagram (SVG)
-└── gtc-demo-setup.excalidraw       # Architecture diagram (Excalidraw source)
+├── agentic-learning-setup.svg              # Architecture diagram (SVG)
+└── agentic-learning-setup.excalidraw       # Architecture diagram (Excalidraw source)
 ```
 
 ---

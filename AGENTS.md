@@ -11,8 +11,8 @@ Stack: NemoClaw sandbox (OpenShell isolation) + Hermes (single process, sub-agen
 ## Diagrams
 
 - **Setup guide (Excalidraw):** https://excalidraw.com/#json=Bp6Up7SZu4rN21cpMA5Yo,9etHITeVufwTQLsh_g7Yow
-- **Setup guide (SVG):** `gtc-demo-setup.svg`
-- **Setup guide (JSON):** `gtc-demo-setup.excalidraw`
+- **Setup guide (SVG):** `agentic-learning-setup.svg`
+- **Setup guide (JSON):** `agentic-learning-setup.excalidraw`
 - **Setup script:** `bash scripts/setup-demo.sh` (idempotent, full setup from scratch)
 
 ## The pipeline

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1020" height="1558" viewBox="0 0 1020 1558">
 <rect width="100%" height="100%" fill="#ffffff"/>
 <g transform="translate(40, 60)">
-<text x="470.0" y="57.800000000000004" text-anchor="middle" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="28" fill="rgba(30,64,175,1.0)">GTC Taipei Demo — NemoClaw Sandbox Security</text>
+<text x="470.0" y="57.800000000000004" text-anchor="middle" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="28" fill="rgba(30,64,175,1.0)">Agentic Learning Series Demo — NemoClaw Sandbox Security</text>
 <text x="470.0" y="80.9" text-anchor="middle" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="14" fill="rgba(100,116,139,1.0)">Two sandboxes · YAML policies · Network isolation · Landlock filesystem · No SSHFS</text>
 <text x="240.0" y="132.0" text-anchor="start" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="20" fill="rgba(30,64,175,1.0)">REPRODUCTION STEPS</text>
 <path d="M 62 140 L 62 1110" fill="none" stroke="rgba(203,213,225,1.0)" stroke-width="2" stroke-dasharray="none"/>
@@ -95,7 +95,7 @@
 <text x="690.0" y="629.75" text-anchor="start" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="10" fill="rgba(71,85,105,1.0)">Deps: pandas, pyarrow</text>
 <text x="690.0" y="649.75" text-anchor="start" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="10" fill="rgba(220,38,38,1.0)">Landlock: best_effort (writes blocked outside /sandbox)</text>
 <text x="690.0" y="669.75" text-anchor="start" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="10" fill="rgba(4,120,87,1.0)">Output: reports/final.md -&gt; downloaded to host</text>
-<text x="470.0" y="1119.3" text-anchor="start" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="18" fill="rgba(30,64,175,1.0)">LOCAL HOST — ~/Development/gtc_taipei/ (NOT inside any sandbox)</text>
+<text x="470.0" y="1119.3" text-anchor="start" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="18" fill="rgba(30,64,175,1.0)">LOCAL HOST — ~/Development/agentic_learning/ (NOT inside any sandbox)</text>
 <path d="M 40 1127 L 900 1127" fill="none" stroke="rgba(100,116,139,1.0)" stroke-width="1" stroke-dasharray="none"/>
 <rect x="40" y="1140" width="400" height="200" rx="40.0" fill="rgba(241,245,249,1.0)" stroke="rgba(30,58,95,1.0)" stroke-width="1.5" stroke-dasharray="none" opacity="1.0"/>
 <text x="240.0" y="1169.425" text-anchor="start" dominant-baseline="alphabetic" font-family="Assistant, -apple-system, sans-serif" font-size="11" fill="rgba(124,58,237,1.0)">policies/</text>

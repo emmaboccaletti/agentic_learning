@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ===========================================================================
-# GTC Taipei Demo — Full Setup Script
+# Agentic Learning Series Demo — Full Setup Script
 # ===========================================================================
 # Sets up both NemoClaw sandboxes (data-pipeline + reporter) from scratch:
 #   1. Ensures OpenShell gateway is running

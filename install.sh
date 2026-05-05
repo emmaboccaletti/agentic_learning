@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ===========================================================================
-# GTC Taipei Demo — Installer
+# Agentic Learning Series Demo — Installer
 # ===========================================================================
 # Sets up two NemoClaw sandboxes (data-pipeline + reporter) from scratch:
 #   1. Checks prerequisites (openshell, nemoclaw, hermes)
@@ -52,7 +52,7 @@ fi
 
 echo ""
 echo -e "${CYAN}  ╔══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}  ║  GTC Taipei Demo Installer                              ║${NC}"
+echo -e "${CYAN}  ║  Agentic Learning Series Demo Installer                              ║${NC}"
 echo -e "${CYAN}  ║  Multi-agent ML pipeline with NemoClaw security         ║${NC}"
 echo -e "${CYAN}  ╚══════════════════════════════════════════════════════════╝${NC}"
 echo ""
@@ -279,7 +279,7 @@ echo ""
 echo "  Next steps:"
 echo "    1. Activate the venv: source .venv/bin/activate"
 echo "    2. Run the pipeline: bash scripts/run_pipeline.sh data/raw/telco-churn.csv Churn"
-echo "    3. Or run step by step (see gtc-taipei-demo-guide.md)"
+echo "    3. Or run step by step (see agentic-learning-demo-guide.md)"
 echo "    4. Run security demo: bash scripts/demo-security.sh"
 echo ""
 echo "  Architecture diagram:"

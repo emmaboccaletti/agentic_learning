@@ -1,4 +1,4 @@
-# GTC Taipei — Tabular ML Pipeline Demo
+# Agentic Learning Series — Tabular ML Pipeline Demo
 
 A multi-agent ML pipeline that turns a client's spreadsheet into a trained model and a one-page decision-support report — all inside hardened NemoClaw sandboxes.
 
@@ -10,7 +10,7 @@ A multi-agent ML pipeline that turns a client's spreadsheet into a trained model
 bash install.sh
 ```
 
-See **[gtc-taipei-demo-guide.md](gtc-taipei-demo-guide.md)** for full setup, manual steps, demo prompts, and troubleshooting.
+See **[agentic-learning-demo-guide.md](agentic-learning-demo-guide.md)** for full setup, manual steps, demo prompts, and troubleshooting.
 
 ## What It Does
 
@@ -30,4 +30,4 @@ Two NemoClaw sandboxes with different security levels:
 
 Both use Landlock filesystem locks, seccomp syscall filtering, and run as an unprivileged `sandbox` user.
 
-![Architecture](gtc-demo-setup.svg)
+![Architecture](agentic-learning-setup.svg)
