@@ -4,7 +4,7 @@
 # ===========================================================================
 # Sets up two NemoClaw sandboxes (data-pipeline + reporter) from scratch:
 #   1. Checks prerequisites (openshell, nemoclaw, hermes)
-#   2. Creates both sandboxes via nemoclaw onboard
+#   2. Creates both sandboxes via `nemoclaw onboard` (interactive wizard)
 #   3. Applies YAML network policies
 #   4. Uploads scripts, skills, data and AGENTS.md to each sandbox
 #   5. Installs Python dependencies inside each sandbox
@@ -49,7 +49,7 @@ fi
 
 echo ""
 echo -e "${CYAN}  ╔══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}  ║  Agentic Learning Series Demo Installer                              ║${NC}"
+echo -e "${CYAN}  ║  Agentic Learning Series Demo Installer                 ║${NC}"
 echo -e "${CYAN}  ║  Multi-agent ML pipeline with NemoClaw security         ║${NC}"
 echo -e "${CYAN}  ╚══════════════════════════════════════════════════════════╝${NC}"
 echo ""
@@ -87,55 +87,48 @@ for rf in "${REQUIRED_FILES[@]}"; do
 done
 ok "All required files present"
 
-# ── Step 2: Ensure gateway is running ─────────────────────────────────────
-section "2. Checking OpenShell gateway"
-
-if openshell gateway status >/dev/null 2>&1; then
-    ok "Gateway already running"
-else
-    info "Gateway not running — it will be started automatically by 'nemoclaw onboard'"
-    warn "If port 8080 is in use, stop the conflicting container first:"
-    warn "  docker stop openshell-cluster-nemoclaw"
-fi
-
-# ── Step 3: Create data-pipeline sandbox ──────────────────────────────────
-section "3. Creating $PIPELINE_SB sandbox"
+# ── Step 2: Onboard data-pipeline sandbox ─────────────────────────────────
+section "2. Onboarding $PIPELINE_SB sandbox"
 
 if [[ "$DRY_RUN" == "1" ]]; then
-    echo "  [DRY RUN] nemoclaw onboard --name $PIPELINE_SB"
-    echo "  [DRY RUN] (wizard: agent=hermes, model=nvidia/nemotron-3-super-120b-a12b, provider=nvidia-prod)"
+    echo "  [DRY RUN] nemoclaw onboard --name $PIPELINE_SB --agent hermes"
 else
     if ! [[ -t 0 ]]; then
         warn "No TTY detected — cannot run interactive wizard"
-        info "Run manually: nemoclaw onboard --name $PIPELINE_SB"
+        info "Run manually: nemoclaw onboard --name $PIPELINE_SB --agent hermes"
         exit 1
     fi
-    info "Running interactive wizard..."
-    info "  When prompted: agent=hermes, model=nvidia/nemotron-3-super-120b-a12b, provider=nvidia-prod"
     echo ""
-    nemoclaw onboard --name "$PIPELINE_SB"
+    info "Launching the NemoClaw onboarding wizard for '$PIPELINE_SB'..."
+    info "  It will ask you to pick a model and inference provider."
+    echo ""
+    nemoclaw onboard --name "$PIPELINE_SB" --agent hermes
+    echo ""
 fi
 ok "$PIPELINE_SB sandbox created"
 
-# ── Step 4: Create reporter sandbox ───────────────────────────────────────
-section "4. Creating $REPORTER_SB sandbox"
+# ── Step 3: Onboard reporter sandbox ──────────────────────────────────────
+section "3. Onboarding $REPORTER_SB sandbox"
 
 if [[ "$DRY_RUN" == "1" ]]; then
-    echo "  [DRY RUN] nemoclaw onboard --name $REPORTER_SB"
+    echo "  [DRY RUN] nemoclaw onboard --name $REPORTER_SB --agent hermes"
 else
     if ! [[ -t 0 ]]; then
         warn "No TTY detected — cannot run interactive wizard"
+        info "Run manually: nemoclaw onboard --name $REPORTER_SB --agent hermes"
         exit 1
     fi
-    info "Running interactive wizard..."
-    info "  When prompted: agent=hermes, model=nvidia/nemotron-3-super-120b-a12b, provider=nvidia-prod"
     echo ""
-    nemoclaw onboard --name "$REPORTER_SB"
+    info "Launching the NemoClaw onboarding wizard for '$REPORTER_SB'..."
+    info "  It will ask you to pick a model and inference provider."
+    echo ""
+    nemoclaw onboard --name "$REPORTER_SB" --agent hermes
+    echo ""
 fi
 ok "$REPORTER_SB sandbox created"
 
-# ── Step 5: Apply network policies ────────────────────────────────────────
-section "5. Applying network policies"
+# ── Step 4: Apply network policies ────────────────────────────────────────
+section "4. Applying network policies"
 
 info "Removing default presets from $PIPELINE_SB..."
 if [[ "$DRY_RUN" == "0" ]]; then
@@ -167,8 +160,8 @@ else
 fi
 ok "$REPORTER_SB policy applied (ZERO network)"
 
-# ── Step 6: Upload files to data-pipeline ─────────────────────────────────
-section "6. Uploading files to $PIPELINE_SB"
+# ── Step 5: Upload files to data-pipeline ─────────────────────────────────
+section "5. Uploading files to $PIPELINE_SB"
 
 UPLOAD_PIPE=(
     "data/raw/telco-churn.csv:/sandbox/data/raw/telco-churn.csv"
@@ -200,8 +193,8 @@ if [[ "$DRY_RUN" == "0" ]]; then
 fi
 ok "Python deps installed in $PIPELINE_SB"
 
-# ── Step 7: Upload files to reporter ──────────────────────────────────────
-section "7. Uploading files to $REPORTER_SB"
+# ── Step 6: Upload files to reporter ──────────────────────────────────────
+section "6. Uploading files to $REPORTER_SB"
 
 UPLOAD_RPT=(
     "scripts/render_report.py:/sandbox/scripts/render_report.py"
@@ -227,8 +220,8 @@ if [[ "$DRY_RUN" == "0" ]]; then
 fi
 ok "Python deps installed in $REPORTER_SB"
 
-# ── Step 8: Setup local Hermes profiles ───────────────────────────────────
-section "8. Setting up local Hermes profiles"
+# ── Step 7: Setup local Hermes profiles ───────────────────────────────────
+section "7. Setting up local Hermes profiles"
 
 info "Running setup_profiles.sh..."
 if [[ "$DRY_RUN" == "1" ]]; then
@@ -238,8 +231,8 @@ else
 fi
 ok "Hermes profiles configured"
 
-# ── Step 9: Verify ────────────────────────────────────────────────────────
-section "9. Verification"
+# ── Step 8: Verify ────────────────────────────────────────────────────────
+section "8. Verification"
 
 if [[ "$DRY_RUN" == "0" ]]; then
     info "Sandbox status:"
