@@ -12,9 +12,8 @@
 #   7. Verifies everything is ready
 #
 # Usage:
-#   bash install.sh                    # full setup
-#   bash install.sh --skip-gateway     # skip gateway start
-#   bash install.sh --dry-run          # show commands without running
+#   bash install.sh              # full setup
+#   bash install.sh --dry-run    # show commands without running
 # ===========================================================================
 
 set -euo pipefail
@@ -34,7 +33,6 @@ fail()  { echo -e "${RED}  ✗ $1${NC}"; exit 1; }
 section() { echo -e "\n${CYAN}═══════════════════════════════════════${NC}"; echo -e "${CYAN}  $1${NC}"; echo -e "${CYAN}═══════════════════════════════════════${NC}"; }
 
 DRY_RUN="${DRY_RUN:-0}"
-SKIP_GATEWAY="${SKIP_GATEWAY:-0}"
 
 PIPELINE_SB="data-pipeline"
 REPORTER_SB="reporter"
@@ -42,7 +40,6 @@ REPORTER_SB="reporter"
 for arg in "$@"; do
     case "$arg" in
         --dry-run)      DRY_RUN=1 ;;
-        --skip-gateway) SKIP_GATEWAY=1 ;;
     esac
 done
 
@@ -90,24 +87,15 @@ for rf in "${REQUIRED_FILES[@]}"; do
 done
 ok "All required files present"
 
-# ── Step 2: Start gateway ─────────────────────────────────────────────────
-if [[ "$SKIP_GATEWAY" == "0" ]]; then
-    section "2. Starting OpenShell gateway"
+# ── Step 2: Ensure gateway is running ─────────────────────────────────────
+section "2. Checking OpenShell gateway"
 
-    if openshell gateway status >/dev/null 2>&1; then
-        ok "Gateway already running"
-    else
-        info "Starting gateway..."
-        if [[ "$DRY_RUN" == "1" ]]; then
-            echo "  [DRY RUN] openshell gateway start"
-        else
-            openshell gateway start
-            sleep 3
-        fi
-        ok "Gateway started"
-    fi
+if openshell gateway status >/dev/null 2>&1; then
+    ok "Gateway already running"
 else
-    section "2. Skipping gateway"
+    info "Gateway not running — it will be started automatically by 'nemoclaw onboard'"
+    warn "If port 8080 is in use, stop the conflicting container first:"
+    warn "  docker stop openshell-cluster-nemoclaw"
 fi
 
 # ── Step 3: Create data-pipeline sandbox ──────────────────────────────────
