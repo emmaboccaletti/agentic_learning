@@ -99,8 +99,14 @@ else
         exit 1
     fi
     echo ""
-    info "Launching the NemoClaw onboarding wizard for '$PIPELINE_SB'..."
-    info "  It will ask you to pick a model and inference provider."
+    echo -e "${YELLOW}  ▸ Sandbox 1/2: '$PIPELINE_SB' (data pipeline — preprocessor, architect, trainer)${NC}"
+    echo ""
+    info "When the wizard prompts you:"
+    info "  Agent runtime     → hermes (pre-selected)"
+    info "  Model             → nvidia/nemotron-3-super-120b-a12b (or your preferred model)"
+    info "  Inference provider → NVIDIA prod (or your configured provider)"
+    echo ""
+    info "Launching the onboarding wizard..."
     echo ""
     nemoclaw onboard --name "$PIPELINE_SB" --agent hermes
     echo ""
@@ -119,8 +125,14 @@ else
         exit 1
     fi
     echo ""
-    info "Launching the NemoClaw onboarding wizard for '$REPORTER_SB'..."
-    info "  It will ask you to pick a model and inference provider."
+    echo -e "${YELLOW}  ▸ Sandbox 2/2: '$REPORTER_SB' (reporter — zero network, client report generation)${NC}"
+    echo ""
+    info "When the wizard prompts you:"
+    info "  Agent runtime     → hermes (pre-selected)"
+    info "  Model             → nvidia/nemotron-3-super-120b-a12b (or your preferred model)"
+    info "  Inference provider → NVIDIA prod (or your configured provider)"
+    echo ""
+    info "Launching the onboarding wizard..."
     echo ""
     nemoclaw onboard --name "$REPORTER_SB" --agent hermes
     echo ""
