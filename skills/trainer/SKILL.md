@@ -20,7 +20,7 @@ You are launched as a Hermes profile, one shot per session, by the operator:
 hermes -p trainer chat -t terminal,file -q "Drain runs/queue/" --yolo
 ```
 
-Toolsets: `terminal` (to invoke `python scripts/train.py`), `file` (to read configs, append ledger, write models). Working directory: the repo root.
+Toolsets: `terminal` (to invoke `scripts/py scripts/train.py`), `file` (to read configs, append ledger, write models). Working directory: the repo root.
 
 ## Core Directive
 
@@ -39,13 +39,14 @@ One config in, one row out. Every config gets exactly one run; every run gets ex
 - confirm `data/clean/clean.parquet` exists and is non-empty
 - confirm `runs/queue/` has at least one config
 - confirm `runs/results.tsv` exists with the header row from `AGENTS.md` (create it if missing)
-- detect GPU availability once via `python -c "import torch; print('gpu' if torch.cuda.is_available() else 'cpu')"` (or the script's built-in detection); pass the result to `train.py --device <gpu|cpu>`
+- detect GPU availability once via `scripts/py -c "import torch; print('gpu' if torch.cuda.is_available() else 'cpu')"` (or the script's built-in detection); pass the result to `train.py --device <gpu|cpu>`
 
 ## Execution Contract
 
 For each config file in `runs/queue/`, in lexicographic order:
 
-- run `python scripts/train.py --config <path> --data data/clean/clean.parquet --models-dir models/ --device <gpu|cpu>`
+- run `scripts/py scripts/train.py --config <path> --data data/clean/clean.parquet --models-dir models/ --device <gpu|cpu>`
+- always invoke `scripts/py` (not bare `python`) so the venv is picked up regardless of shell activation
 - the script handles: load → fit → eval → save model → emit a one-line JSON summary on stdout
 - parse the summary; append one row to `runs/results.tsv` per the schema in `AGENTS.md`
 - on script failure: append a row with `status: failed` and the stderr tail in `secondary_metrics_json`; do not retry
@@ -64,7 +65,7 @@ Your final stdout (consumed by the operator):
 - count of runs attempted, succeeded, failed
 - the winning `run_id` and its primary metric value
 - one line per failure with the stderr tail (if any)
-- absolute path to the winning model under `models/`
+- absolute path to the winning model under `models/` — **resolve via `realpath models/<run_id>.pkl` and quote that exact output**; never type a path you did not just print
 
 ## Escalation Triggers
 

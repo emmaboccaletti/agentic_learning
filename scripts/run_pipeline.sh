@@ -1,43 +1,53 @@
 #!/usr/bin/env bash
-# Run the full four-stage pipeline end-to-end, manually-spawned style.
-# Each stage is a separate Hermes session.
+# Run the full four-stage pipeline by invoking the orchestrator agent.
+# The orchestrator spawns preprocessor → architect → trainer → reporter and
+# verifies hand-off artifacts between stages.
+#
+# Usage:
+#   bash scripts/run_pipeline.sh [<input>] [<target>]
+#
+# Defaults: data/raw/telco-churn.csv, target=Churn
 
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
-# Ensure venv is active so agents inherit pandas/xgboost.
-if [[ -z "${VIRTUAL_ENV:-}" ]]; then
-  if [[ -f .venv/bin/activate ]]; then
-    # shellcheck disable=SC1091
-    source .venv/bin/activate
-  else
-    echo "error: no venv active and .venv/ not found" >&2
-    exit 1
-  fi
-fi
-
-stage() {
-  local n="$1" role="$2" toolsets="$3" prompt="$4"
-  echo
-  echo "=========================================================="
-  echo "  $n. $role"
-  echo "  prompt: $prompt"
-  echo "=========================================================="
-  date
-  hermes -p "$role" chat -t "$toolsets" -q "$prompt" --yolo
-  date
-}
-
 INPUT="${1:-data/raw/telco-churn.csv}"
 TARGET="${2:-Churn}"
 
-stage "1/4" preprocessor terminal,file "Process $INPUT with target=$TARGET"
-stage "2/4" architect    file          "Read data/clean/profile.json and queue 2-3 configs"
-stage "3/4" trainer      terminal,file "Drain runs/queue/"
-stage "4/4" reporter     terminal,file "Render the final report"
+# Sanity: the agents shell out to scripts/py, which resolves to .venv/bin/python.
+# The orchestrator inherits our shell, so confirm the venv exists before we hand off.
+if [[ ! -x .venv/bin/python ]]; then
+  echo "error: .venv/bin/python is missing" >&2
+  echo "  fix: uv venv --python 3.11 && source .venv/bin/activate && uv pip install -r requirements.txt" >&2
+  exit 1
+fi
 
+# Activate venv (no-op if scripts/py already absolutizes, but harmless and helps any
+# operator-level tooling that does rely on the venv being on PATH).
+if [[ -z "${VIRTUAL_ENV:-}" ]]; then
+  # shellcheck disable=SC1091
+  source .venv/bin/activate
+fi
+
+if ! hermes profile list 2>/dev/null | grep -q '^[ ◆]*orchestrator '; then
+  echo "error: hermes profile 'orchestrator' not found" >&2
+  echo "  fix: bash scripts/setup_profiles.sh" >&2
+  exit 1
+fi
+
+echo "=========================================================="
+echo "  orchestrator pipeline"
+echo "  input:  $INPUT"
+echo "  target: $TARGET"
+echo "=========================================================="
+date
+
+hermes -p orchestrator chat -t terminal,file \
+  -q "Process $INPUT with target=$TARGET" --yolo
+
+date
 echo
 echo "=========================================================="
 echo "  DONE"

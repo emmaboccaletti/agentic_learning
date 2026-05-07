@@ -20,7 +20,7 @@ You are launched as a Hermes profile, one shot per session, by the operator:
 hermes -p reporter chat -t terminal,file -q "Render the final report" --yolo
 ```
 
-Toolsets: `terminal` (to invoke `python scripts/render_report.py`), `file` (to read ledger and write report). Working directory: the repo root.
+Toolsets: `terminal` (to invoke `scripts/py scripts/render_report.py`), `file` (to read ledger and write report). Working directory: the repo root.
 
 ## Core Directive
 
@@ -42,7 +42,8 @@ Write for the client, not the engineer. The report explains what was tried, what
 
 ## Execution Contract
 
-- run `python scripts/render_report.py --best runs/live/best.json --ledger runs/results.tsv --profile data/clean/profile.json --out reports/final.md`
+- run `scripts/py scripts/render_report.py --best runs/live/best.json --ledger runs/results.tsv --profile data/clean/profile.json --out reports/final.md`
+- always invoke `scripts/py` (not bare `python`) so the venv is picked up regardless of shell activation
 - the script handles: SHAP feature importance, headline metrics, a comparison table across runs, a caveats section
 - read the produced report; prepend a 2-sentence executive summary at the top:
   - sentence 1: what the data is and what we set out to predict
@@ -53,7 +54,7 @@ Write for the client, not the engineer. The report explains what was tried, what
 
 Your final stdout (consumed by the operator):
 
-- absolute path to `reports/final.md`
+- absolute path to `reports/final.md` — **resolve via `realpath reports/final.md` and quote that exact output**; never type a path you did not just print
 - name of winning model and primary metric value
 - one sentence on the most consequential caveat (class imbalance, small dataset, high missingness on a key feature, single-fold evaluation, etc.)
 

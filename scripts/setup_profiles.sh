@@ -8,7 +8,7 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 HERMES_HOME="${HERMES_HOME:-$HOME/.hermes}"
 PROFILES_DIR="$HERMES_HOME/profiles"
 
-ROLES=(preprocessor architect trainer reporter)
+ROLES=(preprocessor architect trainer reporter orchestrator)
 
 if ! command -v hermes >/dev/null 2>&1; then
   echo "error: hermes binary not found on PATH" >&2
