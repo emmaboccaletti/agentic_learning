@@ -1,5 +1,7 @@
 # Agentic Learning Series — Tabular ML Pipeline Demo
 
+Got it by observing: https://email.sg.on24event.com/ls/click?upn=u001.7kf5QUY4LGF7Fzt7LGE4bbPPsSPtBC4KXSPVJqWhtiGd2VxFpxReawo6a3RcrywzVgpC1Lv-2BC-2B9bEV29Y1H4GBNUSGQDknu3b8N2vGZ0C1T8XwpR68qsSfgcv8I1icx6dir32uc7A2ZrAHJ4C033TK9qW5-2BhsRyKJVnfWfr2Iis-3DQPaR_5IgsvHeeIeXECZJQCkw-2FF51PL-2FhEk9LBBDF-2FShggWm0IZBm-2FKc384iiLcemR7bD8L4E6CPGTurzuNYMQ54V0-2Ba0kXJgE2J8zVm211Y3stVwqIAiTzVyDZosK8BTm8GgpMvJTo6B992CqOK57gK-2FRnPncFLMoozSaVslM7pmVUs-2B9aoEvPdDd-2Fp8-2FjDNhc550qw-2FYQa1tR-2Fa3gIMMIbq4PsdGSKDaYQVJVcVK7VPACrWbgoFid2188wpKaxIT4XH1Fghb9128xEvxw5yV-2FFRTAqmbWPKG7Si7l-2BZqZFBx-2BgIQXhAS0GkprUN-2FcdE6fLq3Dcd5LE-2Fbxau5N1DUU8iiLA-3D-3D
+
 A multi-agent ML pipeline that turns a client's spreadsheet into a trained model and a one-page decision-support report — all inside hardened NemoClaw sandboxes.
 
 > **One-line story:** "Drop a CSV in, get a model and a report out — four agents, two sandboxes, zero trust."
